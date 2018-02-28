@@ -41,6 +41,15 @@ All the state and input variables are in SI units.
 
 The vehicle reference speed is set to be 17.88 m/s (40 mph). The prediction horizon `T` is chosen to be 3 seconds, which corresponds to 53.64 m look ahead distance. Beyond that horizon, the environment cannot be reliably predicted.
 
+Then, three sets of timestep length `N` and elapsed duration `dt` are evaluated:
+
+| N   | dt    | 
+|:---:|:-----:| 
+| 30  | 0.1   | 
+| 15  | 0.2   | 
+| 10  | 0.3   | 
+
+From the simulation results, I found there is not too much performance gain with reduced `dt`. Therefore, `dt = 0.3` and `N = 10` are selected, in order to save the computation time.
 
 ## Waypoints Fitting and Preprocessing
 
