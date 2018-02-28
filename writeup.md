@@ -12,7 +12,7 @@ The goal of this project is to implement an Model Predictive Control in C++ to d
 [image5]: ./images/cte.png
 [image6]: ./images/epsi.png
 [image7]: ./images/input.png
-[image8]: ./images/cost.png
+[image8]: ./images/cost_fun.png
 
 ---
 
