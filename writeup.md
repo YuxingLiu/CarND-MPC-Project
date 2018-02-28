@@ -11,6 +11,7 @@ The goal of this project is to implement an Model Predictive Control in C++ to d
 [image4]: ./images/v.png
 [image5]: ./images/cte.png
 [image6]: ./images/epsi.png
+[image7]: ./images/input.png
 
 ---
 
@@ -30,9 +31,15 @@ A sixth order kinematic model is considered in this project, which is given by:
 
 ![alt text][image6]
 
+where the states are x and y positions, oridentation, velocity, cross track error, and orientation error. The inputs are steering angle and acceleration, subject to te constraints:
 
+![alt text][image7]
+
+All the state and input variables are in SI units.
 
 ## MPC Parameters
+
+The vehicle reference speed is set to be 17.88 m/s (40 mph). The prediction horizon `T` is chosen to be 3 seconds, which corresponds to 53.64 m look ahead distance. Beyond that horizon, the environment cannot be reliably predicted.
 
 
 ## Waypoints Fitting and Preprocessing
