@@ -58,5 +58,47 @@ After tuning, the cost function has the form:
 
 ## Waypoints Fitting and Preprocessing
 
+The waypoints are first transformed from map's coordinate to car's coordinate, then fitted as a cubic function:
+```cpp
+int n_wp = ptsx.size();
+Eigen::VectorXd x_wp(n_wp);
+Eigen::VectorXd y_wp(n_wp);
+
+for(int i = 0; i < n_wp; i++) {
+  x_wp[i] = (ptsx[i] - px) * cos(psi) + (ptsy[i] - py) * sin(psi);
+  y_wp[i] = -(ptsx[i] - px) * sin(psi) + (ptsy[i] - py) * cos(psi);
+}
+
+// Third order polynomial fit
+auto coeffs = polyfit(x_wp, y_wp, 3);
+```
+
+The positions and orientation are set to origin in car's coordinate, the velocity is converted from mph to m/s, and the errors are computed in car's coordinate:
+```cpp
+double x0 = 0;
+double y0 = 0;
+double psi0 = 0;
+
+// mph to m/s
+v = v * 0.44704;
+
+double cte = y0 - polyeval(coeffs, x0);
+double epsi = psi0 - atan(coeffs[1] + 2*coeffs[2] * x0 + 3*coeffs[3] * pow(x0, 2));
+
+// Current state
+Eigen::VectorXd state(6);
+state << x0, y0, psi0, v, cte, epsi;
+```
+
+The steering and throttle values are transformed to steering angle and acceleration, before sending to MPC:
+```cpp
+// Current input
+double steering = j[1]["steering_angle"];
+double throttle = j[1]["throttle"];
+double delta = - steering * deg2rad(25);
+double a = throttle * 1.0;
+Eigen::VectorXd input(2);
+input << delta, a;
+```
 
 ## Latency
