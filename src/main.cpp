@@ -107,7 +107,7 @@ int main() {
 	  // Third order polynomial fit
 	  auto coeffs = polyfit(x_wp, y_wp, 3);
 
-	  // Set car to origion in car's coordinate system
+	  // Set car to origin in car's coordinate system
 	  double x0 = 0;
 	  double y0 = 0;
 	  double psi0 = 0;
