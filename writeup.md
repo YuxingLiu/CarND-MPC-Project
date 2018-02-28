@@ -12,6 +12,7 @@ The goal of this project is to implement an Model Predictive Control in C++ to d
 [image5]: ./images/cte.png
 [image6]: ./images/epsi.png
 [image7]: ./images/input.png
+[image8]: ./images/cost.png
 
 ---
 
@@ -50,6 +51,10 @@ Then, three sets of timestep length `N` and elapsed duration `dt` are evaluated:
 | 10  | 0.3   | 
 
 From the simulation results, I found there is not too much performance gain with reduced `dt`. Therefore, `dt = 0.3` and `N = 10` are selected, in order to save the computation time.
+
+After tuning, the cost function has the form:
+
+![alt text][image8]
 
 ## Waypoints Fitting and Preprocessing
 
