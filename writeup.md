@@ -1,7 +1,7 @@
 # Model Predictive Control Project
 [![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
 
-The goal of this project is to implement an Model Predictive Control in C++ to drive a vehicle around the track in a [simulator](https://github.com/udacity/self-driving-car-sim). Escentially, the MPC manipulates the steering wheel and throttle to minimize the cross track error (CTE) and orientation error, while maintaining constant vehicle speed, in presense of 100 ms actuation latency.
+The goal of this project is to implement an Model Predictive Control in C++ to drive a vehicle around the track in a [simulator](https://github.com/udacity/self-driving-car-sim). Escentially, the MPC manipulates the steering wheel and throttle to minimize the cross track error (CTE) and orientation error, while maintaining constant vehicle speed, in presence of 100 ms actuation latency.
 
 [//]: # (Image References)
 
@@ -32,7 +32,7 @@ A sixth order kinematic model is considered in this project, which is given by:
 
 ![alt text][image6]
 
-where the states are x and y positions, oridentation, velocity, cross track error, and orientation error. The inputs are steering angle and acceleration, subject to te constraints:
+where the states are x and y positions, orientation, velocity, cross track error, and orientation error. The inputs are steering angle and acceleration, subject to the constraints:
 
 ![alt text][image7]
 
@@ -58,7 +58,7 @@ After tuning, the cost function has the form:
 
 ## Waypoints Fitting and Preprocessing
 
-The waypoints are first transformed from map's coordinate to car's coordinate, then fitted as a cubic function:
+The waypoints are first transformed from map's coordinate to car's coordinate, and then fitted as a cubic function:
 ```cpp
 int n_wp = ptsx.size();
 Eigen::VectorXd x_wp(n_wp);
@@ -103,7 +103,7 @@ input << delta, a;
 
 ## Latency
 
-To to account for the 100 ms latency, MPC will recalculate the initial states using the vehicle model:
+To account for the 100 ms latency, MPC will recalculate the initial states using the vehicle model:
 ```cpp
   if(latency > 0) {
     double x0 = state[0];
