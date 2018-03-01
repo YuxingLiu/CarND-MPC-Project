@@ -121,3 +121,4 @@ To account for the 100 ms latency, MPC will recalculate the initial states using
     state[5] = epsi0 + v0 / Lf * input[0] * latency;
   }
 ```
+The final simulation video can be found [here](./images/MPC.mp4)
