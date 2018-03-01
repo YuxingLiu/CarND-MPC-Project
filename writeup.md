@@ -102,3 +102,22 @@ input << delta, a;
 ```
 
 ## Latency
+
+To to account for the 100 ms latency, MPC will recalculate the initial states using the vehicle model:
+```cpp
+  if(latency > 0) {
+    double x0 = state[0];
+    double y0 = state[1];
+    double psi0 = state[2];
+    double v0 = state[3];
+    double cte0 = state[4];
+    double epsi0 = state[5];
+
+    state[0] = x0 + v0 * cos(psi0) * latency;
+    state[1] = y0 + v0 * sin(psi0) * latency;
+    state[2] = psi0 + v0 / Lf * input[0] * latency;
+    state[3] = v0 + input[1] * latency;
+    state[4] = cte0 + v0 * sin(epsi0) * latency;
+    state[5] = epsi0 + v0 / Lf * input[0] * latency;
+  }
+```
